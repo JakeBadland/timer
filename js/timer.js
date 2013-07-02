@@ -18,6 +18,7 @@ var timer = {
          var to_static = new Date("2013,01,01, 12:00:00");
          var from_static = new Date("2012,01,01, 12:00:00");
          */
+        //test commit
         //console.log(navigator.appName);
 
         $("body").everyTime(1000, function(i) {
