@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC>
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -13,13 +13,14 @@
     <script src="js/timer.js"></script>
     <script type="text/javascript">
         var config = {
-            'from'          : '2013/04/01T12:00:00',
-            'to'            : '2013/01/01T12:00:00',
-            'type'          : 'static',
-            'upperColor'    : '128,0,0',
-            'bottomColor'   : '0,0,128',
-            'fontColor'     : '200,200,200',
-            'fontSize'      : 50
+            'api_key'       : 'test',
+            'from'          : '2013/04/01T12:00:00',    //+
+            'to'            : '2013/01/01T12:00:00',    //+
+            'type'          : 'dynamic',
+            'upperColor'    : '255,0,0',                //+
+            'bottomColor'   : '0,0,255',                //+
+            'fontColor'     : '255,255,255',            //+
+            'fontSize'      : 20                        //+
         }
         timer.start(config);
     </script>
@@ -28,7 +29,7 @@
 <body>
 <div class="container"></div>
     <div class="center">
-
+        <!--
         <div class="head">Выберите тип таймера:</div>
         <div><input type="radio" name="group1" value="1" checked>До события осталось (при перезагрузке страницы время считается заново)</div>
         <div><input type="radio" name="group1" value="2">После события прошло (при перезагрузке страницы время считается заново)</div>
@@ -49,7 +50,7 @@
         <div><input type="radio" name="group3" value="1" checked>Большой</div>
         <div><input type="radio" name="group3" value="2">Средний</div>
         <div><input type="radio" name="group3" value="3">Маленький</div>
-
+        -->
 
         <div id="countdown" class="countdownHolder">
             <span class="countDays">
@@ -88,6 +89,7 @@
                 </span>
             </span>
         </div>
+
 
     </div>
 </body>

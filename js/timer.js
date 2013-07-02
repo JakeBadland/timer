@@ -1,4 +1,6 @@
 var timer = {
+    prefix : '[timer.js] message: ',
+    errors : 0,
     start : function(config)
     {
         $.getScript('js/jquery.timers.js', function(){
@@ -9,33 +11,83 @@ var timer = {
                 $('.digit').css('color', timer.ColorToHex(config['fontColor']));
 
             if (config['fontSize'])
-                $('.countdownHolder').css('font-size', config['fontSize']);
-        });
-        return;
-        /*
-         var to = new Date("2013/01/01T12:00:00");
-         var from = new Date("2013,04,01, 12:00:00");
-         var to_static = new Date("2013,01,01, 12:00:00");
-         var from_static = new Date("2012,01,01, 12:00:00");
-         */
-        //test commit
-        //console.log(navigator.appName);
+                //$('.countdownHolder').css('font-size', config['fontSize']+'/1.5');
+                var font = config['fontSize']+"px/1.5  'Open Sans Condensed',sans-serif";
+                console.log(font);
+                $('.countdownHolder').css('font', font);
 
-        $("body").everyTime(1000, function(i) {
-            var now = new Date();
-            from_static.setSeconds(to_static.getSeconds() - i);
-            to_static.setSeconds(to_static.getSeconds() + i);
+            if (typeof config['from'] == 'undefined')
+            {
+                console.log(timer.prefix +'Field "from" required! Exiting...');
+                timer.errors += 1;
+                return;
+            }
+            else
+            {
+                if (navigator.appName != 'Microsoft Internet Explorer')
+                {
+                    config['from'] = timer.convertDate(config['from']);
+                }
+            }
 
-            var data = timer.getTime(now,to);
-            timer.updateDuo(0, 1, data['days']);
-            timer.updateDuo(2, 3, data['hours']);
-            timer.updateDuo(4, 5, data['minutes']);
-            timer.updateDuo(6, 7, data['seconds']);
+            if (typeof config['to'] == 'undefined')
+            {
+                console.log(timer.prefix +'Field "to" required! Exiting...');
+                timer.errors += 1;
+                return;
+            }
+            else
+            {
+                if (navigator.appName != 'Microsoft Internet Explorer')
+                {
+                    config['to'] = timer.convertDate(config['to']);
+                }
+            }
 
-            //$('#dinamic-up').html(getTime(now,to));
-            //$('#static-down').html(getTime(from,to_static));
-            //$('#static-up').html(getTime(to,from_static));
-            //var $container = $("#countdown").find('.position');
+            if (timer.errors == 0)
+            {
+                console.log(config['to'] + ' ' +config['from']);
+                if (config['type'] == 'dynamic')
+                {
+                    var to_static = new Date(config['to']);
+                    //var to_static = new Date("2013,01,01, 12:00:00");
+                    var from_static = new Date(config['from']);
+                    //var from_static = new Date("2012,01,01, 12:00:00");
+                }
+                if (config['type'] == 'static')
+                {
+                    var to = new Date(config['to']);
+                    //var to = new Date("2013/01/01T12:00:00");
+                    var from = new Date(config['from']);
+                    //var from = new Date("2013,04,01, 12:00:00");
+                }
+
+                $("body").everyTime(1000, function(i) {
+                    var now = new Date();
+                    var data;
+                    if (config['type'] == 'static')
+                    {
+                        from_static.setSeconds(to_static.getSeconds() - i);
+                        to_static.setSeconds(to_static.getSeconds() + i);
+                        data = timer.getTime(from_static,to_static);
+                    }
+
+                    if (config['type'] == 'dynamic')
+                    {
+                        data = timer.getTime(now,to);
+                    }
+
+                    timer.updateDuo(0, 1, data['days']);
+                    timer.updateDuo(2, 3, data['hours']);
+                    timer.updateDuo(4, 5, data['minutes']);
+                    timer.updateDuo(6, 7, data['seconds']);
+
+                    //$('#dinamic-up').html(getTime(now,to));
+                    //$('#static-down').html(getTime(from,to_static));
+                    //$('#static-up').html(getTime(to,from_static));
+                    //var $container = $("#countdown").find('.position');
+                });
+            }
         });
     },
     ColorToHex : function(color){
@@ -104,8 +156,18 @@ var timer = {
         timer.switchDigit(positions.eq(major),value%10);
     },
     setGradient: function (selector,from,to){
+        //background-image: -webkit-linear-gradient(bottom, #3A3A3A 50%, #444444 50%);
         selector.css({background: "-moz-linear-gradient(center bottom , "+timer.ColorToHex(from)+" 50%, "+timer.ColorToHex(to)+" 50%)"});
         selector.css({background: "-ms-linear-gradient(bottom, rgb("+from+") 50%, rgb("+to+") 50%)"});
         selector.css({background: "-webkit-gradient(linear,left bottom,left top,color-stop(0.5, "+timer.ColorToHex(from)+"),color-stop(0.5, "+timer.ColorToHex(to)+"))"});
+        selector.css({background: "-webkit-linear-gradient(bottom, "+timer.ColorToHex(from)+" 50%, "+timer.ColorToHex(to)+" 50%)"});
+    },
+    convertDate: function (date)
+    {
+        date = date.replace('T', ' ');
+        date = date.replace('/', ',');
+        date = date.replace('/', ',');
+        return date;
     }
+
 }
