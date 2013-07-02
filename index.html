@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/colorpicker.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/jquery-ui.css" />
+    <link rel="stylesheet" href="countdown/jquery.countdown.css" />
+
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <!--<script src="http://spz.od.ua/timers/js/timer.js"></script>-->
+    <script src="js/timer.js"></script>
+    <script type="text/javascript">
+        var config = {
+            'from'          : '2013/04/01T12:00:00',
+            'to'            : '2013/01/01T12:00:00',
+            'type'          : 'static',
+            'upperColor'    : '128,0,0',
+            'bottomColor'   : '0,0,128',
+            'fontColor'     : '200,200,200',
+            'fontSize'      : 50
+        }
+        timer.start(config);
+    </script>
+
+</head>
+<body>
+<div class="container"></div>
+    <div class="center">
+
+        <div class="head">Выберите тип таймера:</div>
+        <div><input type="radio" name="group1" value="1" checked>До события осталось (при перезагрузке страницы время считается заново)</div>
+        <div><input type="radio" name="group1" value="2">После события прошло (при перезагрузке страницы время считается заново)</div>
+        <div><input type="radio" name="group1" value="3">До события осталось (время идет вне зависимости от обновления страницы)</div>
+        <div><input type="radio" name="group1" value="4">После события прошло (время идет вне зависимости от обновления страницы)</div>
+
+        <div class="head">Выберите дату и введите время события:</div>
+        <p>Дата: <input type="text" id="datepicker" />Время: <input type="text" value="12:00:00" /></p>
+
+        <div class="head">Выберите цвета оформления:</div>
+        <div id="colorSelector"><div style="background-color: rgb(24, 24, 194);"></div></div>
+        <div><input type="radio" name="group2" value="1" checked>Цвет фона (верх)</div>
+        <div><input type="radio" name="group2" value="2">Цвет фона (верх)</div>
+        <div><input type="radio" name="group2" value="3">Цвет текста</div>
+        <div><input type="radio" name="group2" value="4">Цвет тени</div>
+
+        <div class="head">Выберите размер:</div>
+        <div><input type="radio" name="group3" value="1" checked>Большой</div>
+        <div><input type="radio" name="group3" value="2">Средний</div>
+        <div><input type="radio" name="group3" value="3">Маленький</div>
+
+
+        <div id="countdown" class="countdownHolder">
+            <span class="countDays">
+                <span class="position">
+                    <span class="digit static">0</span>
+                </span>
+                <span class="position">
+                    <span class="digit static">0</span>
+                </span>
+            </span>
+                    <span class="countDiv countDiv0"></span>
+            <span class="countHours">
+                <span class="position">
+                    <span class="digit static">0</span>
+                </span>
+                <span class="position">
+                    <span class="digit static">0</span>
+                </span>
+            </span>
+                    <span class="countDiv countDiv1"></span>
+            <span class="countMinutes">
+                <span class="position">
+                    <span class="digit static">0</span>
+                </span>
+                <span class="position">
+                    <span class="digit static">0</span>
+                </span>
+            </span>
+                    <span class="countDiv countDiv2"></span>
+            <span class="countSeconds">
+                <span class="position">
+                    <span class="digit static">0</span>
+                </span>
+                <span class="position">
+                    <span class="digit static">0</span>
+                </span>
+            </span>
+        </div>
+
+    </div>
+</body>
+</html>
