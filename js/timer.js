@@ -11,7 +11,6 @@ var timer = {
             if (config['fontSize'])
                 $('.countdownHolder').css('font-size', config['fontSize']);
         });
-
         return;
         /*
          var to = new Date("2013/01/01T12:00:00");
